@@ -10,7 +10,9 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 #
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/api-gestion-entidad-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build_maven /home/app/target/nbsadapter-1.0.1.jar /tmp/nbsadapter1.jar
 # ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-cp", "/tmp/nbsadapter1.jar", \
+        "-Dspring.profiles.active=local", \
+        "org.springframework.boot.loader.JarLauncher"]
