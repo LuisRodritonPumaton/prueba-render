@@ -12,7 +12,7 @@
 	<artifactId>api-gestion-entidad</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api-gestion-entidad</name>
-	<description>gestion entidad bck</description>
+	<description>s</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -45,7 +45,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -94,7 +93,6 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
