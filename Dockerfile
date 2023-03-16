@@ -1,18 +1,15 @@
-FROM maven:3.6.0-jdk-11-slim AS build_maven
+#
+# Build stage
+#
+FROM maven:3.6.0-jdk-11-slim AS build
 COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
-# Enable below block of code for gradle builds
-##FROM gradle:6.8-jdk8 AS build_gradle
-##COPY src /home/app/src
-##COPY build.gradle /home/app
-##WORKDIR /home/app
-##RUN gradle --no-daemon build
-
+#
+# Package stage
+#
 FROM openjdk:11-jre-slim
-##COPY --from=build_gradle /home/app/build/libs/nbsadapter.jar /tmp
-COPY --from=build_maven /home/app/target/nbsadapter-1.0.1.jar /tmp/nbsadapter1.jar
-ENTRYPOINT ["java", "-cp", "/tmp/nbsadapter1.jar", \
-        "-Dspring.profiles.active=local", \
-        "org.springframework.boot.loader.JarLauncher"]
+COPY --from=build /home/app/target/demo-0.0.1-SNAPSHOT.jar /usr/local/lib/demo-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/usr/local/lib/demo-0.0.1-SNAPSHOT.jar"]
