@@ -11,8 +11,8 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM openjdk:17.0.1-jdk-slim
 
-# COPY --from=build /target/api-gestion-entidad-0.0.1-SNAPSHOT.jar app.jar
+COPY /target/api-gestion-entidad-0.0.1-SNAPSHOT.jar app.jar
 # ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandon -jar","api-gestion-entidad-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandon -jar","app.jar"]
 
