@@ -18,6 +18,17 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>com.yugabyte</groupId>
+			<artifactId>jdbc-yugabytedb</artifactId>
+			<version>42.3.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+		<dependency>
+		<groupId>com.zaxxer</groupId>
+		<artifactId>HikariCP</artifactId>
+		<version>4.0.3</version>
+		</dependency>
+		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>

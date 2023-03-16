@@ -25,3 +25,4 @@ public class Usuario {
     @Column(name = "password")
     String password;
 }
+
