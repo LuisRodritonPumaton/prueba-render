@@ -10,8 +10,8 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 #
 FROM openjdk:17.0.1-jdk-slim
-
-COPY --from=build /target/app.jar app.jar
+CMD tree
+COPY --from=build /target/app-0.0.1-SNAPSHOT.jar app.jar
 # ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandon -jar","app.jar"]
