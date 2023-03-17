@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,14 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gestion.apigestionentidad.model.TipoContribuyente;
+import com.gestion.apigestionentidad.model.Usuario;
 import com.gestion.apigestionentidad.services.TipoContribuyenteService;
+import com.gestion.apigestionentidad.services.UsuarioSerive;
 
 @RestController
 @RequestMapping("api/tipo_contribuyente")
 public class TipoContribuyenteController {
     @Autowired
     private TipoContribuyenteService tipoContribuyenteService;
-
+    @Autowired
+    private UsuarioSerive usuarioSerive;
     @GetMapping("/lista")
     public JSONObject listarTipoContribuyente() throws Exception{
         try{
@@ -51,6 +55,13 @@ public class TipoContribuyenteController {
             JSONObject jsonpObject = new JSONObject(map);
             return jsonpObject;
         }
+    }
+    @PostMapping("/registrar_usuario")
+    public Usuario registrar_tipo_contribuyente(@RequestBody Usuario tipoContribuyente) throws Exception{
+        Usuario usuarioLocal = tipoContribuyente;
+        usuarioLocal.setPassword(new BCryptPasswordEncoder().encode(usuarioLocal.getPassword()));
+        usuarioSerive.registrarUsuario(usuarioLocal);
+        return usuarioLocal;
     }
     @PutMapping("/actualizar_tipo_contribuyente")
     public JSONObject actualizar_tipo_contribuyente(@RequestBody TipoContribuyente tipoContribuyente) throws Exception{
